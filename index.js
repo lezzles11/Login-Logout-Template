@@ -2,6 +2,7 @@ var express = require("express");
 var app = express();
 const bodyParser = require("body-parser");
 const hbs = require("express-handlebars");
+var cookieParser = require("cookie-parser");
 var routes = require("./routes");
 var errorHandlers = require("./middleware/errorhandlers");
 var log = require("./middleware/log");
@@ -15,8 +16,9 @@ app.engine(
   })
 );
 app.use(express.static(__dirname + "/public"));
-
+app.use(cookieParser());
 app.set("view engine", "hbs");
+
 app.get("/", routes.index);
 app.get("/login", routes.login);
 app.post("/login", routes.loginProcess);
