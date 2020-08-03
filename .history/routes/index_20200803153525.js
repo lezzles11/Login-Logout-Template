@@ -3,7 +3,7 @@ module.exports.index = index;
 module.exports.login = login;
 module.exports.loginProcess = loginProcess;
 module.exports.chat = chat;
-module.exports.logout = logout;
+module.exports.logout = chat;
 
 function index(req, res) {
   res.cookie("IndexCookie", "This was set from Index");
@@ -29,7 +29,7 @@ function loginProcess(req, res) {
 function chat(req, res) {
   res.render("chat");
 }
-function logout(req, res) {
-  util.logout(req.session);
+function logOut(req, res) {
+  util.logOut(req.session);
   res.redirect("/");
 }

@@ -30,6 +30,6 @@ function chat(req, res) {
   res.render("chat");
 }
 function logout(req, res) {
-  util.logout(req.session);
+  util.logOut(req.session);
   res.redirect("/");
 }

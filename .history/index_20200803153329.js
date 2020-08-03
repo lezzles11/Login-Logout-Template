@@ -47,7 +47,7 @@ app.get("/login", routes.login);
 app.post("/login", routes.loginProcess);
 app.get("/chat", [util.requireAuthentication], routes.chat);
 app.get("/account/login", routes.login);
-app.get("/logout", routes.logout);
+app.get("/logout", routes.logOut);
 app.use(errorHandlers.error);
 app.use(errorHandlers.notFound);
 

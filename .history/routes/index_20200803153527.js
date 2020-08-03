@@ -29,7 +29,7 @@ function loginProcess(req, res) {
 function chat(req, res) {
   res.render("chat");
 }
-function logout(req, res) {
-  util.logout(req.session);
+function logOut(req, res) {
+  util.logOut(req.session);
   res.redirect("/");
 }
