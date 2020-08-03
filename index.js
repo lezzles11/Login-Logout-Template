@@ -3,10 +3,22 @@ var app = express();
 const bodyParser = require("body-parser");
 const hbs = require("express-handlebars");
 var cookieParser = require("cookie-parser");
+var session = require("express-session");
 var routes = require("./routes");
 var errorHandlers = require("./middleware/errorhandlers");
 var log = require("./middleware/log");
 app.use(log.logger);
+app.use(
+  session({
+    secret: "hello",
+  })
+);
+// Increments page count
+app.use(function (req, res, next) {
+  if (req.session.pageCount) req.session.pageCount++;
+  else req.session.pageCount = 1;
+  next();
+});
 app.engine(
   "hbs",
   hbs({
