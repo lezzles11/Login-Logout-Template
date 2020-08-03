@@ -6,11 +6,11 @@ function index(req, res) {
   res.render("index", { title: "Title!" });
 }
 function login(req, res) {
-  res.send("Login");
+  res.render("login");
 }
 function loginProcess(req, res) {
   res.redirect("/");
 }
 function chat(req, res) {
-  res.send("Chat");
+  res.render("chat");
 }
