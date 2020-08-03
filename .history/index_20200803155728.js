@@ -12,7 +12,16 @@ var flashed = require("connect-flash");
 var csrf = require("csurf");
 var config = require("./config");
 var util = require("./middleware/utilities");
+app.engine(
+  "hbs",
+  hbs({
+    extname: ".hbs",
+    defaultLayout: "main",
+    layoutsDir: __dirname + "/views/layouts",
+  })
+);
 
+app.set("view engine", "hbs");
 app.use(log.logger);
 
 // Make sure the cookie parser secret is the same as the session
@@ -27,16 +36,7 @@ app.use(
     store: new Store({ url: config.redisUrl }),
   })
 );
-app.engine(
-  "hbs",
-  hbs({
-    extname: ".hbs",
-    defaultLayout: "main",
-    layoutsDir: __dirname + "/views/layouts",
-  })
-);
 
-app.set("view engine", "hbs");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(csrf());

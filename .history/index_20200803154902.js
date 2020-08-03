@@ -12,21 +12,12 @@ var flashed = require("connect-flash");
 var csrf = require("csurf");
 var config = require("./config");
 var util = require("./middleware/utilities");
-
 app.use(log.logger);
 
 // Make sure the cookie parser secret is the same as the session
 app.use(cookieParser(config.secret));
-
-app.use(express.static(__dirname + "/public"));
-app.use(
-  session({
-    secret: config.secret,
-    saveUninitialized: true,
-    resave: true,
-    store: new Store({ url: config.redisUrl }),
-  })
-);
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.engine(
   "hbs",
   hbs({
@@ -37,8 +28,17 @@ app.engine(
 );
 
 app.set("view engine", "hbs");
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static(__dirname + "/public"));
+app.use(session(config.secret));
+app.use(
+  session({
+    secret: "secret",
+    saveUninitialized: true,
+    resave: true,
+    store: new Store({ url: config.redisUrl }),
+  })
+);
+
 app.use(csrf());
 
 app.use(util.csrf);

@@ -1,6 +1,5 @@
 var util = require("../middleware/utilities");
 var config = require("../config");
-
 module.exports.index = index;
 module.exports.login = login;
 module.exports.loginProcess = loginProcess;
@@ -25,7 +24,7 @@ function loginProcess(req, res) {
     res.redirect("/chat");
   } else {
     req.flash("error", "Wrong Username or Password");
-    res.redirect(config.routes.login);
+    res.redirect("/login");
   }
 }
 function chat(req, res) {

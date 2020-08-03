@@ -1,6 +1,7 @@
 var util = require("../middleware/utilities");
 var config = require("../config");
 
+var csrfProtection = csrf({ cookie: true });
 module.exports.index = index;
 module.exports.login = login;
 module.exports.loginProcess = loginProcess;

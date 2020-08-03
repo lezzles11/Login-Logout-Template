@@ -21,7 +21,7 @@ module.exports.requireAuthentication = function requireAuthentication(
   if (req.session.isAuthenticated) {
     next();
   } else {
-    res.redirect(config.routes.login);
+    res.redirect("/login");
   }
 };
 module.exports.auth = function auth(username, password, session) {
@@ -36,8 +36,6 @@ module.exports.logout = function logout(session) {
   session.isAuthenticated = false;
   delete session.user;
 };
-
-//
 exports.templateRoutes = function templateRoutes(req, res, next) {
   res.locals.routes = config.routes;
 

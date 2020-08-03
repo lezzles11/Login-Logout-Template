@@ -25,6 +25,7 @@
     "express-handlebars": "^5.1.0",
     "express-partials": "0.2.0",
     "express-session": "^1.17.1",
+    "handlebars": "^4.7.6",
     "nodemon": "^2.0.4",
     "redis": "^0.10.1"
   }

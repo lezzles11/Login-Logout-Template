@@ -1,6 +1,5 @@
 var util = require("../middleware/utilities");
 var config = require("../config");
-
 module.exports.index = index;
 module.exports.login = login;
 module.exports.loginProcess = loginProcess;
