@@ -40,11 +40,12 @@ app.use(
 
 app.use(csrf());
 app.use(util.csrf);
+app.use(util.authenticated);
 app.use(flash());
 app.get("/", routes.index);
 app.get("/login", routes.login);
 app.post("/login", routes.loginProcess);
-app.get("/chat", routes.chat);
+app.get("/chat", [util.requireAuthentication], routes.chat);
 app.get("/account/login", routes.login);
 
 app.use(errorHandlers.error);
