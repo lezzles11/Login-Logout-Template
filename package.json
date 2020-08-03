@@ -13,5 +13,15 @@
     "example"
   ],
   "author": "lesley",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "connect-flash": "0.1.1",
+    "connect-redis": "1.4.7",
+    "ejs": "0.8.5",
+    "express": "4.6.1",
+    "express-handlebars": "^5.1.0",
+    "express-partials": "0.2.0",
+    "redis": "0.10.1"
+  }
 }
