@@ -4,21 +4,17 @@ const bodyParser = require("body-parser");
 const hbs = require("express-handlebars");
 var cookieParser = require("cookie-parser");
 var session = require("express-session");
+var Store = require("connect-redis")(session);
 var routes = require("./routes");
 var errorHandlers = require("./middleware/errorhandlers");
 var log = require("./middleware/log");
+var flash = require("connect-flash");
+var csrf = require("csurf");
+var config = require("./config");
+var util = require("./middleware/utilities");
 app.use(log.logger);
-app.use(
-  session({
-    secret: "hello",
-  })
-);
-// Increments page count
-app.use(function (req, res, next) {
-  if (req.session.pageCount) req.session.pageCount++;
-  else req.session.pageCount = 1;
-  next();
-});
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.engine(
   "hbs",
   hbs({
@@ -27,10 +23,24 @@ app.engine(
     layoutsDir: __dirname + "/views/layouts",
   })
 );
-app.use(express.static(__dirname + "/public"));
-app.use(cookieParser());
-app.set("view engine", "hbs");
 
+app.set("view engine", "hbs");
+app.use(express.static(__dirname + "/public"));
+app.use(session({ secret: "secret" }));
+// Make sure the cookie parser secret is the same as the session
+app.use(cookieParser("secret"));
+app.use(
+  session({
+    secret: "secret",
+    saveUninitialized: true,
+    resave: true,
+    store: new Store({ url: config.redisUrl }),
+  })
+);
+
+app.use(csrf());
+app.use(util.csrf);
+app.use(flash());
 app.get("/", routes.index);
 app.get("/login", routes.login);
 app.post("/login", routes.loginProcess);

@@ -17,14 +17,15 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "connect-flash": "0.1.1",
-    "connect-redis": "1.4.7",
+    "connect-redis": "^1.5.0",
     "cookie-parser": "^1.4.5",
+    "csurf": "^1.11.0",
     "ejs": "0.8.5",
     "express": "4.6.1",
     "express-handlebars": "^5.1.0",
     "express-partials": "0.2.0",
     "express-session": "^1.17.1",
     "nodemon": "^2.0.4",
-    "redis": "0.10.1"
+    "redis": "^0.10.1"
   }
 }
