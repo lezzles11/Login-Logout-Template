@@ -1,4 +1,4 @@
-# Socket-Redis Template :rocket:
+# Socket.io - Redis Template :rocket:
 
 ## Purpose :dark_sunglasses:
 
